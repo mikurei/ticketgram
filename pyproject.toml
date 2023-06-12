@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ticketgram"
+version = "0.1.0"
+description = "Telegram Support Bot"
+authors = ["mikurei <contact@mikurei.dev>"]
+license = "GPLv3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.11"
+python-telegram-bot = "20.3"
+peewee = "3.16.2"
+babel = "2.12.1"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "0.0.270"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,32 @@
+anyio==3.7.0 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:275d9973793619a5374e1c89a4f4ad3f4b0a5510a2b5b939444bee8f4c4d37ce \
+    --hash=sha256:eddca883c4175f14df8aedce21054bfca3adb70ffe76a9f607aef9d7fa2ea7f0
+babel==2.12.1 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:b4246fb7677d3b98f501a39d43396d3cafdc8eadb045f4a31be01863f655c610 \
+    --hash=sha256:cc2d99999cd01d44420ae725a21c9e3711b3aadc7976d6147f622d8581963455
+certifi==2023.5.7 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:0f0d56dc5a6ad56fd4ba36484d6cc34451e1c6548c61daad8c320169f91eddc7 \
+    --hash=sha256:c6c2e98f5c7869efca1f8916fed228dd91539f9f1b444c314c06eef02980c716
+h11==0.14.0 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:8f19fbbe99e72420ff35c00b27a34cb9937e902a8b810e2c88300c6f0a3b699d \
+    --hash=sha256:e3fe4ac4b851c468cc8363d500db52c2ead036020723024a109d37346efaa761
+httpcore==0.17.2 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:125f8375ab60036db632f34f4b627a9ad085048eef7cb7d2616fea0f739f98af \
+    --hash=sha256:5581b9c12379c4288fe70f43c710d16060c10080617001e6b22a3b6dbcbefd36
+httpx==0.24.1 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:06781eb9ac53cde990577af654bd990a4949de37a28bdb4a230d434f3a30b9bd \
+    --hash=sha256:5853a43053df830c20f8110c5e69fe44d035d850b2dfe795e196f00fdb774bdd
+idna==3.4 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4 \
+    --hash=sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2
+peewee==3.16.2 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:10769981198c7311f84a0ca8db892fa213303a8eb1305deb795a71e7bd606a91
+python-dotenv==1.0.0 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:a8df96034aae6d2d50a4ebe8216326c61c3eb64836776504fcca410e5937a3ba \
+    --hash=sha256:f5971a9226b701070a4bf2c38c89e5a3f0d64de8debda981d1db98583009122a
+python-telegram-bot==20.3 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:1185edee387db7b08027e87b67fa9a3cc3263ae5ab5bb55513acd1bca5c3cf4b \
+    --hash=sha256:73e46a534be9d1c790ce8b494765cca18a5c2f3f5b4932d83bcb06bb0051eb4a
+sniffio==1.3.0 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101 \
+    --hash=sha256:eecefdce1e5bbfb7ad2eeaabf7c1eeb404d7757c379bd1f7e5cce9d8bf425384
