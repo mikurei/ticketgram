@@ -33,14 +33,14 @@ from utils import validate_ticket_query
 
 logging.basicConfig(format=LOG_FORMAT, level=logging.INFO)
 # suppress the noisy httpx
-httpx_logger = logging.getLogger("httpx")
-httpx_logger.setLevel(logging.WARNING)
+__httpx_logger = logging.getLogger("httpx")
+__httpx_logger.setLevel(logging.WARNING)
 # suppress the PTB warning
 filterwarnings(
     action="ignore", message=r".*CallbackQueryHandler", category=PTBUserWarning
 )
 
-logger = logging.getLogger(__name__)
+__logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     application = (

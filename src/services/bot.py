@@ -13,7 +13,7 @@ from telegram import (
 from telegram.error import BadRequest, Forbidden
 from telegram.ext import Application
 
-logger = logging.getLogger(__name__)
+__logger = logging.getLogger(__name__)
 
 
 async def add_commands(application: Application):
@@ -44,7 +44,7 @@ async def check_prerequisites(application: Application):
     try:
         chat = cast(Chat, await bot.get_chat(AUTHORIZED_GROUP_ID))
     except BadRequest:
-        logger.error(
+        __logger.error(
             "Bot is not a member of the authorized group",
             AUTHORIZED_GROUP_ID,
         )
@@ -52,13 +52,13 @@ async def check_prerequisites(application: Application):
     try:
         await chat.get_member(bot.id)
     except BadRequest:
-        logger.error(
+        __logger.error(
             "Bot is not a member of the authorized group",
             AUTHORIZED_GROUP_ID,
         )
         raise InitializationError
     except Forbidden:
-        logger.error("Bot is restricted from the authorized group")
+        __logger.error("Bot is restricted from the authorized group")
         raise InitializationError
 
     if chat.type != Chat.SUPERGROUP:

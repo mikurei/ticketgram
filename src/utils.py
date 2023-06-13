@@ -17,7 +17,7 @@ from models import SupportTicket, User
 from peewee import DoesNotExist
 from telegram import Update
 
-logger = logging.getLogger(__name__)
+__logger = logging.getLogger(__name__)
 
 
 async def parse_command_target(update: Update, target: str) -> User:
@@ -91,11 +91,11 @@ def validate_ticket_query(data: str) -> bool:
     try:
         ticket_id = UUID(ticket_id)
     except ValueError:
-        logger.debug("Invalid ticket id: %s", ticket_id)
+        __logger.debug("Invalid ticket id: %s", ticket_id)
         return False
 
     if action[0] not in TicketActions.__members__.values():
-        logger.debug("Invalid action: %s", action[0])
+        __logger.debug("Invalid action: %s", action[0])
         return False
     
     return True

@@ -43,13 +43,13 @@ from utils import (
     week_day_localized,
 )
 
-logger = logging.getLogger(__name__)
+__logger = logging.getLogger(__name__)
 
 
 async def error_handler(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
-    logger.error("Exception while handling an update:", exc_info=context.error)
+    __logger.error("Exception while handling an update:", exc_info=context.error)
 
     tb_list = traceback.format_exception(
         None, context.error, context.error.__traceback__
@@ -90,7 +90,7 @@ async def leave_chat(
     """
     Leaves from the chat
     """
-    logger.info("Chat is not authorized: '%s'", update.effective_chat.id)
+    __logger.info("Chat is not authorized: '%s'", update.effective_chat.id)
     context.application.create_task(
         update.effective_chat.leave(), update=update
     )
@@ -210,14 +210,14 @@ async def ticket_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
             SupportTicket.support_message_id == reply_message.id
         )
     except DoesNotExist:
-        logger.debug(
+        __logger.debug(
             "Reply message with id '%s' is not associated with a support ticket",
             reply_message.id,
         )
         return
 
     if ticket.status == TicketStatus.CLOSED:
-        logger.debug(
+        __logger.debug(
             "SupportTicket with id '%s' is closed",
             SupportTicket.id
         )
@@ -228,7 +228,7 @@ async def ticket_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         pseudonym = Employee.get(Employee.user_id == user.id).pseudonym
     except DoesNotExist:
-        logger.debug("Fallback pseudonym to default value")
+        __logger.debug("Fallback pseudonym to default value")
         pseudonym = _("Support Staff")
     # send response
     await bot.send_message(
@@ -255,7 +255,7 @@ async def ticket_actions(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
 
     if update.effective_chat.id != AUTHORIZED_GROUP_ID:
-        logger.info("Callback query tampering attempt by %s", query_user)
+        __logger.info("Callback query tampering attempt by %s", query_user)
         return
 
     raw_ticket_id, action = query.data.split("_", 1)
@@ -462,7 +462,7 @@ async def open_tickets(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if query:
         if update.effective_chat.id != AUTHORIZED_GROUP_ID:
-            logger.info(
+            __logger.info(
                 "Callback query tampering attempt by %s", update.effective_user
             )
             return

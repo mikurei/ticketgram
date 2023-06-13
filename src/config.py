@@ -5,7 +5,7 @@ from datetime import datetime
 from consts import WeekDay
 from dotenv import load_dotenv
 
-logger = logging.getLogger(__name__)
+__logger = logging.getLogger(__name__)
 
 # load environment variables from .env file
 load_dotenv()
@@ -40,18 +40,18 @@ BOT_ACTIVE_DAYS = os.environ.get(
 #
 # validation
 #
-null_req_vars = []
+__null_req_vars = []
 
 if not TELEGRAM_TOKEN:
-    null_req_vars.append("TELEGRAM_TOKEN")
+    __null_req_vars.append("TELEGRAM_TOKEN")
 if not AUTHORIZED_GROUP_ID:
-    null_req_vars.append("AUTHORIZED_GROUP_ID")
+    __null_req_vars.append("AUTHORIZED_GROUP_ID")
 else:
     AUTHORIZED_GROUP_ID = int(AUTHORIZED_GROUP_ID)
 
-if null_req_vars:
-    logger.error(
-        "Required environment variables are not set: %s", null_req_vars
+if __null_req_vars:
+    __logger.error(
+        "Required environment variables are not set: %s", __null_req_vars
     )
     exit(1)
 
