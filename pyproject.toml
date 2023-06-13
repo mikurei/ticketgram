@@ -12,6 +12,7 @@ python-telegram-bot = "20.3"
 peewee = "3.16.2"
 babel = "2.12.1"
 python-dotenv = "1.0.0"
+prometheus-client = "0.17.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "0.0.270"

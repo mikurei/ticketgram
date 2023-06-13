@@ -36,6 +36,11 @@ BOT_ACTIVE_DAYS = os.environ.get(
     "BOT_ACTIVE_DAYS",
     "monday tuesday wednesday thursday friday saturday sunday",
 )
+# defines if the Prometheus client is enabled
+PROMETHEUS_ENABLED = bool(os.environ.get("PROMETHEUS_ENABLED", False))
+# Prometheus port for exposing the application's metrics
+PROMETHEUS_PORT = int(os.environ.get("PROMETHEUS_PORT", "8000"))
+
 
 #
 # validation
@@ -69,3 +74,6 @@ BOT_ACTIVE_DAYS: WeekDay = [
 if BOT_TIME_ZONE not in range(-12, 14 + 1):
     __logger.error("BOT_TIME_ZONE must be a valid timezone (-12, 14)")
     exit(1)
+
+if PROMETHEUS_PORT not in range(1024, 65535 + 1):
+    __logger.error("PROMETHEUS_PORT must be a valid port (1024-65535)")

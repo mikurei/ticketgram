@@ -21,6 +21,9 @@ idna==3.4 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2
 peewee==3.16.2 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:10769981198c7311f84a0ca8db892fa213303a8eb1305deb795a71e7bd606a91
+prometheus-client==0.17.0 ; python_version >= "3.11" and python_version < "3.12" \
+    --hash=sha256:9c3b26f1535945e85b8934fb374678d263137b78ef85f305b1156c7c881cd11b \
+    --hash=sha256:a77b708cf083f4d1a3fb3ce5c95b4afa32b9c521ae363354a4a910204ea095ce
 python-dotenv==1.0.0 ; python_version >= "3.11" and python_version < "3.12" \
     --hash=sha256:a8df96034aae6d2d50a4ebe8216326c61c3eb64836776504fcca410e5937a3ba \
     --hash=sha256:f5971a9226b701070a4bf2c38c89e5a3f0d64de8debda981d1db98583009122a

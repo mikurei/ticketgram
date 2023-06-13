@@ -21,6 +21,7 @@ from consts import (
 )
 from i18n import gt as _
 from models import Employee, SupportTicket, User
+from monitoring import monitor_callback
 from peewee import DoesNotExist
 from telegram import (
     InlineKeyboardButton,
@@ -46,10 +47,13 @@ from utils import (
 __logger = logging.getLogger(__name__)
 
 
+@monitor_callback
 async def error_handler(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
-    __logger.error("Exception while handling an update:", exc_info=context.error)
+    __logger.error(
+        "Exception while handling an update:", exc_info=context.error
+    )
 
     tb_list = traceback.format_exception(
         None, context.error, context.error.__traceback__
@@ -75,6 +79,7 @@ async def error_handler(
     )
 
 
+@monitor_callback
 async def post_init(application: Application) -> None:
     """Called after the initialization and before polling for updates"""
     await services.bot.check_prerequisites(application)
@@ -84,6 +89,7 @@ async def post_init(application: Application) -> None:
     await services.bot.add_commands(application)
 
 
+@monitor_callback
 async def leave_chat(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
@@ -97,6 +103,7 @@ async def leave_chat(
     raise ApplicationHandlerStop
 
 
+@monitor_callback
 async def ticket(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Initializes the ticket creation conversation"""
     message = update.effective_message
@@ -135,6 +142,7 @@ async def ticket(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     return ConversationState.WAITING_FOR_MESSAGE
 
 
+@monitor_callback
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Stops the conversation"""
     await update.effective_message.edit_text(
@@ -143,6 +151,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     return ConversationHandler.END
 
 
+@monitor_callback
 async def process_user_ticket(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
@@ -194,6 +203,7 @@ async def process_user_ticket(
     return ConversationHandler.END
 
 
+@monitor_callback
 async def ticket_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Forwards the staff reply to the client"""
     message = update.effective_message
@@ -218,8 +228,7 @@ async def ticket_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if ticket.status == TicketStatus.CLOSED:
         __logger.debug(
-            "SupportTicket with id '%s' is closed",
-            SupportTicket.id
+            "SupportTicket with id '%s' is closed", SupportTicket.id
         )
         return
 
@@ -248,6 +257,7 @@ async def ticket_response(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+@monitor_callback
 async def ticket_actions(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     query_user = query.from_user
@@ -324,6 +334,7 @@ async def ticket_actions(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
 
+@monitor_callback
 async def preprocess_update(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ):
@@ -348,6 +359,7 @@ async def preprocess_update(
         )
 
 
+@monitor_callback
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Shows welcome message"""
     work_time = [time.strftime("%H:%M") for time in BOT_TIME_ACTIVE]
@@ -370,6 +382,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+@monitor_callback
 async def ban_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Blocks the user in the system"""
     message = update.effective_message
@@ -401,6 +414,7 @@ async def ban_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await message.reply_text(_("✅ User has been banned"))
 
 
+@monitor_callback
 async def unban_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Unblocks the user in the system"""
     message = update.effective_message
@@ -427,6 +441,7 @@ async def unban_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await message.reply_text(_("⚠️ User is not banned"))
 
 
+@monitor_callback
 async def set_staff_pseudonym(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ):
@@ -451,6 +466,7 @@ async def set_staff_pseudonym(
     )
 
 
+@monitor_callback
 async def open_tickets(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Lists open tickets for the staff member"""
     query_prefix = "OPEN_TICKETS_"

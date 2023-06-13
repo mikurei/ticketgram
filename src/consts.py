@@ -1,5 +1,7 @@
 from enum import IntEnum, StrEnum
 
+APPLICATION_NAME = "ticketgram"
+
 MAX_SUMMARY_LINE_LENGTH = 48
 
 TICKET_AGE_WARNING = 60 * 60 * 24  # day

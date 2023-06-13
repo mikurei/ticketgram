@@ -16,8 +16,9 @@ from callbacks import (
     ticket_response,
     unban_user,
 )
-from config import AUTHORIZED_GROUP_ID, TELEGRAM_TOKEN
+from config import AUTHORIZED_GROUP_ID, TELEGRAM_TOKEN, PROMETHEUS_PORT, PROMETHEUS_ENABLED
 from consts import LOG_FORMAT, ConversationState
+from monitoring import run_exporter
 from telegram import Update
 from telegram.ext import (
     Application,
@@ -121,5 +122,8 @@ if __name__ == "__main__":
     )
 
     application.add_error_handler(error_handler)
+
+    if PROMETHEUS_ENABLED:
+        run_exporter(PROMETHEUS_PORT)
 
     application.run_polling()

@@ -15,12 +15,14 @@ See more at [Screenshots](screenshots/SCREENSHOTS.md)
 - Dockerized
 - Internationalization support
 - Access control & usage limitting
+- Monitoring support (Prometheus)
 
 # Uses
 - `Python 3.11`
 - `python-telegram-bot` Telegram Bot HTTP API wrapper (that you can't refuse)
 - `peewee` as an ORM
 - `babel` for localization
+- `prometheus-client` for instrumentation & serving the `/metrics` endpoint
 - `SQLite` as a database
 
 # Commands
@@ -48,7 +50,7 @@ Support-side:
    2. You will see that the bot automatically leaves from unauthorized groups.
    3. Notice the log line `... | INFO | callbacks::leave_chat (...) | Chat is not authorized: 'chat_id'`, where `chat_id` is supergroup id
    > ℹ️ Optionally, use a bot or a custom telegram client of your choice that gives you `chat_id` of the group, for example [@getidsbot](https://t.me/getidsbot)
-   
+
 [1] - Learn more about supergroup triggers here: https://stackoverflow.com/a/62291433
 
 # Installation
@@ -59,6 +61,7 @@ First of all, clone the repository using the `git clone` command and `cd` into t
 ## Using Poetry (recommended)
 ```bash
 poetry install
+poetry shell
 ```
 
 ## Using pip
@@ -76,7 +79,7 @@ export KEY=VALUE
 
 ...
 
-poetry run python src/bot.py
+python src/bot.py
 ```
 
 # Deploy using Docker
@@ -109,12 +112,25 @@ List of available env vars
 |AUTHORIZED_GROUP_ID|**Required** group in which the bot operates|
 |BOT_LANGUAGE|*Optional* Language of the bot's messages. Defaults to `"en"`|
 |DB_URI|*Optional* SQLite connection URI. Defaults to `"sqlite.db"`|
-|USER_OPEN_TICKETS_MAX|*Optional* Maximum amount of open tickets per user. Default to `"3"`|
+|USER_OPEN_TICKETS_MAX|*Optional* Maximum amount of open tickets per user. Defaults to `"3"`|
 |BOT_TIME_ACTIVE|*Optional* Support opening hours which are displayed in the welcome message. Defaults to `"09:00-17:00"`|
 |BOT_TIME_ZONE|*Optional* Timezone of the support. Defaults to `"+0"`|
 |BOT_ACTIVE_DAYS|*Optional* Working days of the support. Defaults to `"monday tuesday wednesday thursday friday saturday sunday"`|
+|PROMETHEUS_ENABLED|*Optional* Enables the Prometheus metrics exporter. Defaults to `False`|
+|PROMETHEUS_PORT|*Optional* Port on which the bot serves the `/metrics` endpoint. Defaults to `8000`|
 
 To change the welcome and support reply messages, review the `templates.py` module.
+
+# Monitoring the bot
+Ticketgram provides an optional feature that allows you to export metrics to **Prometheus**. To enable it, set the `PROMETHEUS_ENABLED` to `1` and provide a port using `PROMETHEUS_PORT`.
+
+You will need a configured [Prometheus](https://prometheus.io/) server for pulling metrics from the bot. You can use the awesome [Grafana](https://grafana.com/) for visualizaiton.
+
+Currently, ticketgram provides two metrics:
+- `ticketgram_callbacks_total{func_name}`
+- `ticketgram_callbacks_duration_seconds{func_name}`
+
+To check if the exporter works, open `http://HOST:PROMETHEUS_PORT` in your browser, for example http://localhost:8000
 
 # Localization
 Project uses [GNU gettext](https://docs.python.org/3/library/gettext.html) and [Babel](https://babel.pocoo.org/en/latest/index.html) utilities for internationalization.
