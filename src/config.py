@@ -66,4 +66,6 @@ BOT_ACTIVE_DAYS: WeekDay = [
     for day_str in BOT_ACTIVE_DAYS.split(" ", 6)
 ]
 
-assert BOT_TIME_ZONE in range(-12, 14)
+if BOT_TIME_ZONE not in range(-12, 14 + 1):
+    __logger.error("BOT_TIME_ZONE must be a valid timezone (-12, 14)")
+    exit(1)
