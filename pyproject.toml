@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ticketgram"
-version = "0.2.0"
+version = "0.2.1"
 description = "Telegram Support Bot"
 authors = ["mikurei <contact@mikurei.dev>"]
 license = "GPLv3"
