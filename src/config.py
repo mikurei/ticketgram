@@ -22,7 +22,7 @@ AUTHORIZED_GROUP_ID = os.environ.get("AUTHORIZED_GROUP_ID")
 # Optional environment variables
 #
 # bot language
-BOT_LANGUAGE = os.environ.get("LANGUAGE", "ru")
+BOT_LANGUAGE = os.environ.get("BOT_LANGUAGE", "ru")
 # database connection URI
 DB_URI = os.environ.get("DB_URI", "sqlite.db")
 # maximum tickets per single user
