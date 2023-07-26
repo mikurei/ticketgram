@@ -83,6 +83,12 @@ python src/bot.py
 ```
 
 # Deploy using Docker
+You can pull the latest image from Docker Hub:
+```bash
+docker pull mikurei/ticketgram:latest
+```
+Head to the [build section](#build) if you want to build the image by yourself.
+
 ## Build
 ```bash
 cd ticketgram
