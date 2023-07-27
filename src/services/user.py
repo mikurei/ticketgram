@@ -1,7 +1,7 @@
 from consts import TicketStatus
 from models import SupportTicket, User, UserBan
 from peewee import DoesNotExist
-
+from typing import Sequence
 
 def ban(user: User, reason: str | None = None):
     """Restricts access to the system for given :obj:`User`"""
@@ -23,7 +23,7 @@ def is_banned(user: User) -> bool:
         return False
 
 
-def get_open_tickets(user: User):
+def get_open_tickets(user: User) -> Sequence[SupportTicket]:
     """Returns all open tickets created by :obj:`User`"""
     q = SupportTicket.select().where(
         SupportTicket.user == user & SupportTicket.status == TicketStatus.OPEN
