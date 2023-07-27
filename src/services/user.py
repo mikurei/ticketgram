@@ -10,8 +10,8 @@ def ban(user: User, reason: str | None = None):
 
 def unban(user: User) -> bool:
     """Removes access restriction from the :obj:`User`"""
-    q = UserBan.delete().where(UserBan.user_id == user.id)
-    return q.execute()
+    query = UserBan.delete().where(UserBan.user_id == user.id)
+    return query.execute()
 
 
 def is_banned(user: User) -> bool:
@@ -25,7 +25,7 @@ def is_banned(user: User) -> bool:
 
 def get_open_tickets(user: User) -> Sequence[SupportTicket]:
     """Returns all open tickets created by :obj:`User`"""
-    q = SupportTicket.select().where(
+    query = SupportTicket.select().where(
         SupportTicket.user == user & SupportTicket.status == TicketStatus.OPEN
     )
-    return q.execute()
+    return query.execute()
