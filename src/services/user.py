@@ -26,6 +26,6 @@ def is_banned(user: User) -> bool:
 def get_open_tickets(user: User) -> Sequence[SupportTicket]:
     """Returns all open tickets created by :obj:`User`"""
     query = SupportTicket.select().where(
-        SupportTicket.user == user & SupportTicket.status == TicketStatus.OPEN
+        (SupportTicket.user == user) & (SupportTicket.status == TicketStatus.OPEN)
     )
     return query.execute()
